@@ -1,0 +1,19 @@
+.section {
+  background-color: rgba(195, 202, 132, 0.596);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+}
+
+.form {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /* background-color: rgba(195, 202, 132, 0.596); */
+}
+.button {
+  background-color: rgb(184, 140, 22);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
