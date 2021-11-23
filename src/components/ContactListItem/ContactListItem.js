@@ -20,24 +20,27 @@ const ContactListItem = () => {
   return (
     <>
       {filter === ''
-        ? contacts.map(({ name, number, id }) => (
-            <li key={id} className={s.item}>
-              <p>
-                {name} : {number}
-              </p>
-              <button
-                type="button"
-                className={s.button}
-                onClick={() =>
-                  dispatch(deleteThunkContact(id)).then(() =>
-                    dispatch(getThunkContacts()),
-                  )
-                }
-              >
-                Delete
-              </button>
-            </li>
-          ))
+        ? contacts &&
+          contacts
+            // .sort((a, b) => a.name.localeCompare(b.name))
+            .map(({ name, number, id }) => (
+              <li key={id} className={s.item}>
+                <p>
+                  {name} : {number}
+                </p>
+                <button
+                  type="button"
+                  className={s.button}
+                  onClick={() =>
+                    dispatch(deleteThunkContact(id)).then(() =>
+                      dispatch(getThunkContacts()),
+                    )
+                  }
+                >
+                  Delete
+                </button>
+              </li>
+            ))
         : contacts.map(
             ({ name, number, id }) =>
               name.toLowerCase().includes(filter.toLowerCase()) && (
