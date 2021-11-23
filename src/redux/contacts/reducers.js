@@ -26,8 +26,7 @@ export const contacts = createReducer([], {
   [getThunkContacts.fulfilled]: (_, { payload }) => payload,
   [addThunkContact.fulfilled]: (state, { payload }) => [payload, ...state],
   [deleteThunkContact]: (state, { payload }) =>
-    // state.contacts.filter(contact => contact.id !== payload),
-    state.filter(contact => console.log(contact)),
+    state.contacts.filter(contact => contact.id !== payload),
 });
 
 export const loading = createReducer(false, {

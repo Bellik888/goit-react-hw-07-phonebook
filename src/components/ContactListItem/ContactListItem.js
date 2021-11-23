@@ -20,10 +20,10 @@ const ContactListItem = () => {
   return (
     <>
       {filter === ''
-        ? contacts.map(({ name, phone, id }) => (
+        ? contacts.map(({ name, number, id }) => (
             <li key={id} className={s.item}>
               <p>
-                {name} : {phone}
+                {name} : {number}
               </p>
               <button
                 type="button"
@@ -39,11 +39,11 @@ const ContactListItem = () => {
             </li>
           ))
         : contacts.map(
-            ({ name, phone, id }) =>
+            ({ name, number, id }) =>
               name.toLowerCase().includes(filter.toLowerCase()) && (
                 <li key={id} className={s.item}>
                   <p>
-                    {name} : {phone}
+                    {name} : {number}
                   </p>
                   <button
                     type="button"
