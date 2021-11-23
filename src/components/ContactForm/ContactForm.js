@@ -7,11 +7,13 @@ import s from './ContactForm.module.css';
 // import { addContact } from '../../redux/contacts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from '../../redux/contacts/selectors';
-import { addThunkContact } from '../../redux/contacts/operations';
+import {
+  addThunkContact,
+  getThunkContacts,
+} from '../../redux/contacts/operations';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-
   const contacts = useSelector(getContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -31,7 +33,9 @@ const ContactForm = () => {
     names.includes(value.name)
       ? alert(`${value.name} is already in contacts!!!`)
       : // : dispatch(addContact(value));
-        dispatch(addThunkContact({ name, number }));
+        dispatch(addThunkContact({ name, number })).then(() =>
+          dispatch(getThunkContacts()),
+        );
   };
 
   const handleSubmit = e => {
@@ -52,8 +56,6 @@ const ContactForm = () => {
     }
     return;
   };
-  // console.log(onAdd)
-
   return (
     <section className={s.section}>
       <form onSubmit={handleSubmit} className={s.form}>
@@ -93,17 +95,3 @@ ContactForm.propTypes = {
 };
 
 export default ContactForm;
-
-// const mapStateToProps = state => {
-//   return {
-//     contacts: state.contacts,
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onAdd:contact=>dispatch(addContact(contact))
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(ContactForm)

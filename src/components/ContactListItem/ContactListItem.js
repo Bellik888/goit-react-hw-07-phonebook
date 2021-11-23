@@ -8,9 +8,11 @@ import {
   getThunkContacts,
   deleteThunkContact,
 } from '../../redux/contacts/operations';
+import { Spinner } from '../Spinner/Spinner';
 
 const ContactListItem = () => {
   const filter = useSelector(getFilter);
+  const state = useSelector(state => state.contacts.loading);
 
   const dispatch = useDispatch();
 
@@ -19,6 +21,7 @@ const ContactListItem = () => {
   const contacts = useSelector(getContacts);
   return (
     <>
+      {state && <Spinner />}
       {filter === ''
         ? contacts &&
           contacts
