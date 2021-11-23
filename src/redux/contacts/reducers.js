@@ -23,10 +23,11 @@ export const contactFilter = createReducer('', {
 });
 
 export const contacts = createReducer([], {
-  [getThunkContacts.fulfilled]: (_, { payload }) => [...payload],
-  [addThunkContact.fulfilled]: (state, { payload }) => [...state, payload],
+  [getThunkContacts.fulfilled]: (_, { payload }) => payload,
+  [addThunkContact.fulfilled]: (state, { payload }) => [payload, ...state],
   [deleteThunkContact]: (state, { payload }) =>
-    state.filter(contact => contact.id !== payload),
+    // state.contacts.filter(contact => contact.id !== payload),
+    state.filter(contact => console.log(contact)),
 });
 
 export const loading = createReducer(false, {

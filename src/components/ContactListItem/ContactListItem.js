@@ -10,13 +10,13 @@ import {
 } from '../../redux/contacts/operations';
 
 const ContactListItem = () => {
-  const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
   const dispatch = useDispatch();
 
   useEffect(() => dispatch(getThunkContacts()), [dispatch]);
 
+  const contacts = useSelector(getContacts);
   return (
     <>
       {filter === ''
@@ -28,7 +28,11 @@ const ContactListItem = () => {
               <button
                 type="button"
                 className={s.button}
-                onClick={() => dispatch(deleteThunkContact(id))}
+                onClick={() =>
+                  dispatch(deleteThunkContact(id)).then(() =>
+                    dispatch(getThunkContacts()),
+                  )
+                }
               >
                 Delete
               </button>

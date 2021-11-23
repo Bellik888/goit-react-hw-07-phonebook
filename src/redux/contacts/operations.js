@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getContacts, addContact, deleteContact } from '../../service/mockapi';
 
 export const getThunkContacts = createAsyncThunk(
-  'getContacts',
+  'contacts/getContacts',
   async (_, { rejectWithValue }) => {
     try {
       const contacts = await getContacts();
@@ -14,7 +14,7 @@ export const getThunkContacts = createAsyncThunk(
 );
 
 export const addThunkContact = createAsyncThunk(
-  'addContact',
+  'contacts/addContact',
   async (contact, { rejectWithValue }) => {
     try {
       return await addContact(contact);
@@ -25,7 +25,7 @@ export const addThunkContact = createAsyncThunk(
 );
 
 export const deleteThunkContact = createAsyncThunk(
-  'deleteContact',
+  'contacts/deleteContact',
   async (id, { rejectWithValue }) => {
     try {
       return await deleteContact(id);
