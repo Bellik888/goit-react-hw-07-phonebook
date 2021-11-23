@@ -3,14 +3,9 @@ import { useState } from 'react';
 import shortid from 'shortid';
 import s from './ContactForm.module.css';
 
-//==========redux========
-// import { addContact } from '../../redux/contacts/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from '../../redux/contacts/selectors';
-import {
-  addThunkContact,
-  getThunkContacts,
-} from '../../redux/contacts/operations';
+import { addThunkContact } from '../../redux/contacts/operations';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -32,10 +27,7 @@ const ContactForm = () => {
     const names = contacts.map(contact => contact.name);
     names.includes(value.name)
       ? alert(`${value.name} is already in contacts!!!`)
-      : // : dispatch(addContact(value));
-        dispatch(addThunkContact({ name, number })).then(() =>
-          dispatch(getThunkContacts()),
-        );
+      : dispatch(addThunkContact({ name, number }));
   };
 
   const handleSubmit = e => {

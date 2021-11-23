@@ -12,39 +12,34 @@ import { Spinner } from '../Spinner/Spinner';
 
 const ContactListItem = () => {
   const filter = useSelector(getFilter);
+  const contacts = useSelector(getContacts);
   const state = useSelector(state => state.contacts.loading);
 
   const dispatch = useDispatch();
 
   useEffect(() => dispatch(getThunkContacts()), [dispatch]);
 
-  const contacts = useSelector(getContacts);
   return (
     <>
       {state && <Spinner />}
       {filter === ''
-        ? contacts &&
-          contacts
-            // .sort((a, b) => a.name.localeCompare(b.name))
-            .map(({ name, number, id }) => (
-              <li key={id} className={s.item}>
-                <p>
-                  {name} : {number}
-                </p>
-                <button
-                  type="button"
-                  className={s.button}
-                  onClick={() =>
-                    dispatch(deleteThunkContact(id)).then(() =>
-                      dispatch(getThunkContacts()),
-                    )
-                  }
-                >
-                  Delete
-                </button>
-              </li>
-            ))
-        : contacts.map(
+        ? contacts.length > 0 &&
+          contacts.map(({ name, number, id }) => (
+            <li key={id} className={s.item}>
+              <p>
+                {name} : {number}
+              </p>
+              <button
+                type="button"
+                className={s.button}
+                onClick={() => dispatch(deleteThunkContact(id))}
+              >
+                Delete
+              </button>
+            </li>
+          ))
+        : contacts.length > 0 &&
+          contacts.map(
             ({ name, number, id }) =>
               name.toLowerCase().includes(filter.toLowerCase()) && (
                 <li key={id} className={s.item}>
